@@ -1,7 +1,9 @@
 from multiprocessing import connection
 import sqlite3
 
-class User:
+from flask_restful import Resource, reqparse
+
+class User: 
     def __init__(self, _id, username, password) -> None:
         self.id = _id
         self.username = username
@@ -40,3 +42,26 @@ class User:
             user = None
         conn.close()
         return user
+
+class UserRegister(Resource):
+
+    parser = reqparse.RequestParser()
+    parser.add_argument("username", type=str, required=True, help="This field can't be blank")
+    parser.add_argument("password", type=str, required=True, help="This field can't be blank")
+
+    def post(self):
+
+        data = UserRegister.parser.parse_args()
+        connection = sqlite3.connect('data.db')
+        cursor = connection.cursor()
+
+        user = User.find_by_username(data["username"])
+        if user:
+            return {"message": "User already exists"}, 400
+
+        query = "INSERT INTO users VALUES (NULL, ?, ?)"
+        cursor.execute(query, (data["username"], data["password"]))
+
+        connection.commit()
+        connection.close()
+        return {"message": "User successfully registered"}, 201
