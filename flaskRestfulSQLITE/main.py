@@ -4,22 +4,22 @@ connection = sqlite3.connect("data.db")
 
 cursor = connection.cursor()
 
-create_table = "CREATE TABLE IF NOT EXISTS users (id int, username text, password text)"
+CREATE_TABLE = "CREATE TABLE IF NOT EXISTS users (id int, username text, password text)"
 
-cursor.execute(create_table)
+cursor.execute(CREATE_TABLE)
 
 user = (1, "kairi", "password")
 users = [
     (2, "kairi2", "password"),
     (3, "kairi3", "password")
 ]
-insert_query = "INSERT INTO users VALUES (?,?,?)"
+INSERT_QUERY = "INSERT INTO users VALUES (?,?,?)"
 
-cursor.execute(insert_query, user)
-cursor.executemany(insert_query, users)
-select_query = "SELECT * FROM users"
+cursor.execute(INSERT_QUERY, user)
+cursor.executemany(INSERT_QUERY, users)
+SELECT_QUERY = "SELECT * FROM users"
 
-for row in cursor.execute(select_query):
+for row in cursor.execute(SELECT_QUERY):
     print(row)
 
 connection.commit()

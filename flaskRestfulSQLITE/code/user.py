@@ -3,12 +3,18 @@ import sqlite3
 
 from flask_restful import Resource, reqparse
 
+from flask_jwt import jwt_required, current_identity
+
 class User: 
     def __init__(self, _id, username, password) -> None:
         self.id = _id
         self.username = username
         self.password = password
 
+    @jwt_required()
+    def get(self):
+        user = current_identity
+        # then implement admin auth method
     @classmethod
     def find_by_username(cls, username):
         conn = sqlite3.connect("data.db")
