@@ -6,12 +6,17 @@ from flask_jwt import JWT
 
 from security import authenticate, identity as identity_function
 
-from code.resources.user import UserRegister
-from code.resources.item import Item, ItemList
+from resources.user import UserRegister
+from resources.item import Item, ItemList
+
+from db import db
 
 app = Flask(__name__)
 app.secret_key = "kairihojo"
 app.config['JWT_AUTH_URL_RULE'] = '/login'
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 # config JWT to expire within half an hour
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800)
 
@@ -50,4 +55,5 @@ api.add_resource(ItemList, '/items') # http://localhost:5000/item/kairi
 api.add_resource(UserRegister, "/register")
 
 if __name__ == "__main__":
+    db.init_app(app)
     app.run(port=5000)

@@ -1,10 +1,9 @@
 
 import sqlite3
-from tkinter.messagebox import RETRY
 
 from flask_jwt import jwt_required
 from flask_restful import Resource, reqparse
-from code.models.item import ItemModel
+from models.item import ItemModel
 
 class Item(Resource):
     parser = reqparse.RequestParser()
