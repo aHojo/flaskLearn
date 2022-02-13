@@ -1,4 +1,4 @@
-# /c/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/Shared/Python39_64/python.exe 
+# /c/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/Shared/Python39_64/python.exe
 from datetime import timedelta
 from flask import Flask, jsonify
 from flask_restful import Api
