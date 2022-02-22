@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Questioner</title>
+</head>
+<body>
+    <h1>Welcome to the puppy questionnaire </h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.breed.label }} {{ form.breed }}
+        <br>
+        {{ form.neutered.label }} {{ form.neutered }}
+        <br>
+        {{ form.food_choice.label }} {{ form.food_choice }}
+        <br>
+        {{ form.mood.label }} {{ form.mood }}
+        <br>
+        Any other feedback?
+        {{ form.feedback }}
+        <br>
+        {{  form.submit() }}
+
+    </form>
+</body>
+</html>
