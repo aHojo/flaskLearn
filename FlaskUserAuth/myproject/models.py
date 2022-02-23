@@ -9,8 +9,8 @@ from flask_login import UserMixin
 def load_user(user_id):
     return User.get_by_id(user_id)
 
-class User(db.Model, UserMixin):
 
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -27,5 +27,5 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password_hash, password)
 
     @classmethod
-    def get_by_id(cls, id):
-        return User.query.get(id)
+    def get_by_id(cls, user_id):
+        return User.query.get(user_id)
